@@ -7,6 +7,8 @@ html {
     font-family: "Courier New", Courier, monospace;
     font-weight: 600;
     background-color: $lightBackground;
+    box-sizing: border-box;
+
 }
 
 .wrapper {
@@ -94,6 +96,62 @@ cursor: pointer;
     display: grid;
     justify-self: center;
 }
+.volumeBox{
+    display: flex;
+    width: 15rem;
+    height: 2rem;
+    border: 1px solid blue;
+    box-sizing: border-box;
+}
+.volumeNull {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid blue;
+    box-sizing: border-box;
+
+}
+.volumeMinus {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid blue;
+    box-sizing: border-box;
+
+}
+.volumePlus {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgb(0, 255, 76);
+    box-sizing: border-box;
+
+}
+
+.volumeValueWrapper {
+    font-size: 2rem;
+    width: 9rem;
+    height: 2rem;
+    border: 1px solid rgb(0, 255, 76);
+    color: black;
+    box-sizing: border-box;
+
+}
+.volumeValue {
+    top: 0;
+    left: 0;
+    font-size: 1rem;
+    width: 50%;
+    height: 2rem;
+    border: 1px solid rgb(0, 255, 76);
+    background-color: rgb(228, 84, 113);
+    color: black;
+    box-sizing: border-box;
+
+}
+
+
+
+
+
+
 .title {
     height: 7rem;
     font-size: 3rem;
@@ -176,7 +234,19 @@ pointer-events: none;
     justify-self: center;
     background-color: rgba(75, 179, 80, 0.37);
 }
-
+.btnFullScreen {
+    background-color: rgb(105, 237, 100);
+    color: cornsilk;
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;
+}
 .btnOk {
     background-color: cornflowerblue;
     color: cornsilk;
@@ -189,6 +259,16 @@ pointer-events: none;
     cursor: pointer;
     align-self: center;
     justify-self: center;
+}
+.countCorrect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(12, 95, 33);
+    font-size: 1.8rem;
+    color: cornsilk;
+    width: 5rem;
+    height: 5rem;
 }
 .countIncorrect {
     display: flex;
@@ -230,10 +310,25 @@ pointer-events: none;
     height: 5rem;
     cursor: pointer;
 }
+.winnerBox {
+    font-size: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(0, 0, 0);
+    width: 50%;
+    height: 50%;
+    background-color: $lightStartMenu;    
+}
 
 .incorrectUnswer {
     border: 2px solid red;
 animation: 0.1s tremor ease-out;
+}
+
+.winnerGame {
+    border: 2px solid rgb(0, 255, 149);
+animation: 2s main-rotate ease-out;
 }
 
 @keyframes tremor {
@@ -253,5 +348,14 @@ animation: 0.1s tremor ease-out;
     100% {
         left:0.5px;
         transform: translateX(4%);  
+    }
+}
+
+@keyframes main-rotate {
+    0% {
+    transform: skewY(0);
+    }
+    100% {
+    transform: skewY(30deg);
     }
 }
