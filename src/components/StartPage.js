@@ -33,7 +33,7 @@ const backToMenu = ()=>{
 const startGame = ()=>{
  setIsSubmit(!isSubmit);
  setPlayer({name:refName.current.value, difficulty:difficulty});
- playSound(soundBackground, 50);
+ playSound(soundBackground, 75);
 
 }
 
