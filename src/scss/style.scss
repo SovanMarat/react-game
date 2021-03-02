@@ -1,6 +1,7 @@
 $lightBackground:rgb(227, 231, 231);
 $lightStartMenu:rgb(255, 255, 255);
-$lightCell:rgb(23, 99, 99);
+$lightCell:rgb(3, 44, 44);
+$lightBtn:rgb(100, 149, 237);
 
 html {
     font-size: 10px;
@@ -8,9 +9,25 @@ html {
     font-weight: 600;
     background-color: $lightBackground;
     box-sizing: border-box;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background-color: blueviolet;
+}
+.rightBlock {
+    font-size: 2rem;
+    color: rgb(238, 238, 238);
+    top: 0;
+    right: 0;
+    width: 40rem;
+    height: 100%;
+    background-color: rgb(188, 176, 199);
 
 }
-
 .wrapper {
     position: absolute;
     top: 0;
@@ -42,18 +59,49 @@ html {
     font-size: 3rem;
 
 }
+.scoreTitle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.boxScore{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction:column;
+    align-items: center;
+}
+.scoreTable{
+    font-size:2rem;
+    width: 30rem;
+    height: 3rem;
+    background-color:$lightStartMenu;
+    z-index:1;
+    margin-top: 1rem;
+     display:flex;
+    align-items:center;
+    padding-left: 1rem;
+}
+.boxScoreBtn{
+     display:flex;
+     justify-content: center;
+
+}
 .btnStart {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
-    height: 50px;
+    width: 15rem;
+    height: 5rem;
     font-size: 2rem;
     color: cornsilk;
 cursor: pointer;
 background-color: rgb(63, 70, 70);
 transition: 0.3s;
 margin-top: 0.5rem;
+z-index: 2;
 }
 .btnStart:hover {
 background-color: rgb(0, 107, 107);
@@ -62,15 +110,26 @@ background-color: rgb(0, 107, 107);
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 50%;
+    width: 100%;
 }
-
-.btnBoxRight{
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
+.statistics {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(179, 212, 29);
+    display:flex;
+flex-direction:column;
+text-align: center;
+font-size: 3rem;
+}
+.leftBlock{
+    top: 0;
+    left: 0;
+    width: 30rem;
+    height: 100%;
+    background-color: rgb(188, 176, 199);
 }
 
 .test {
@@ -90,6 +149,7 @@ cursor: pointer;
 .game {
     width: 100%;
     height: 80%;
+    align-self: flex-start;
     /* width: 900px; */
     /* border: 2px solid blue; */
     /* margin: 2rem auto; */
@@ -138,7 +198,7 @@ cursor: pointer;
     top: 0;
     left: 0;
     font-size: 1rem;
-    width: 50%;
+    width: 75%;
     height: 2rem;
     border: 1px solid rgb(0, 255, 76);
     background-color: rgb(228, 84, 113);
@@ -146,11 +206,6 @@ cursor: pointer;
     box-sizing: border-box;
 
 }
-
-
-
-
-
 
 .title {
     height: 7rem;
@@ -248,7 +303,7 @@ pointer-events: none;
     justify-self: center;
 }
 .btnOk {
-    background-color: cornflowerblue;
+    background-color: $lightBtn;
     color: cornsilk;
     width: 5rem;
     height: 5rem;
@@ -259,6 +314,19 @@ pointer-events: none;
     cursor: pointer;
     align-self: center;
     justify-self: center;
+}
+.btnRepeat {
+    background-color: $lightBtn;
+    color: cornsilk;
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;   
 }
 .countCorrect {
     display: flex;
@@ -291,7 +359,7 @@ pointer-events: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(100, 237, 111);
+    background-color: $lightBtn;
     font-size: 1.8rem;
     color: cornsilk;
     width: 5rem;
@@ -303,7 +371,7 @@ pointer-events: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(216, 237, 100);
+    background-color: $lightBtn;
     font-size: 1.8rem;
     color: rgb(8, 8, 8);
     width: 5rem;
