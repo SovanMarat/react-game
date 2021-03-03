@@ -75,7 +75,7 @@ const startGame = ()=>{
 } else {
 setPlayer({name:refName.current.value, difficulty:difficulty, easy:"1", normal:"1", hard: "1", easyInCorrect:"0", normalInCorrect:"0", hardInCorrect:"0", easyCorrect:"0", normalCorrect:"0", hardCorrect:"0", easyScore:"0", normalScore:"0", hardScore: "0"});
 }
- playSound(soundBackground, 75);
+ playSound(soundBackground, 0);
 
 }
 

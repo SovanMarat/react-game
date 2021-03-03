@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 module.exports = {
+devtool: 'eval-source-map',
   entry: "./src/index.js",
   output: {
     path: path.join(__dirname, "/dist"),
@@ -15,8 +15,19 @@ module.exports = {
         use: ["babel-loader"]
       },
       {
-        test: /\.(scss|css)$/,
-        use: ["style-loader", "css-loader"]
+        test: /\.(jpg|png|gif|svg|wav|mp3)$/i,
+       use: ['file-loader'],
+       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
       }
     ]
   },

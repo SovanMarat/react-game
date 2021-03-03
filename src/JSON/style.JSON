@@ -1,0 +1,11 @@
+{
+    "light": {
+        "btnBackground":"#3b3b8a"
+
+    },
+
+    "dark": {
+        "btnBackground":"rgb(0, 44, 44)"
+    }
+        
+    }

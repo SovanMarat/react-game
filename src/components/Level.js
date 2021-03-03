@@ -36,8 +36,8 @@ props.setChanged(data);
     {(props.repeat) 
               ? <>
               <div className="boxRepeat">
-              <div className="titleRepeat"> Repeat? </div>
-              <div className="btnRepeat" onClick={()=>repeatLevel(data[level])}> Ok </div>
+              <div className="titleRepeat"></div>
+              <div className="btnRepeat" onClick={()=>repeatLevel(data[level])}>Заново</div>
               </div>
               </>
 : <></>

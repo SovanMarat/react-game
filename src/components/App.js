@@ -2,11 +2,17 @@ import React from "react";
 
 import '../scss/style.scss';
 import Level from './Level';
+import ScorePage from './ScorePage';
+
 import playSound from './utils/sounds';
 import soundCorrect from '../audio/true.wav';
 import soundInCorrect from '../audio/false.wav';
 import styleExport from '../JSON/style.JSON';
 import data from './data.json';
+// const divStyle = {
+//   color: 'blue',
+//   width:'50rem'
+// };
 
 class App extends React.Component {
   constructor(props) {
@@ -20,30 +26,43 @@ class App extends React.Component {
       squares: [],
       codGame: {},
       styleApp: "light",
-      volume: 75,
+      volume: 0,
       stateGame: false,
       fullScreen: false,
       currentPlayer: JSON.parse(localStorage.getItem(localStorage.getItem("currentPlayer"))),
       countCorrect: 0,
       countIncorrect: 0,
+      statistics: false,
+      statisticsView: "easy",
+      dataScoreState: null,
     }
-
+    this.difficulty = this.props.difficulty;
+    this.currentLevel=this.props.currentLevel;
     this.fieldCurrent = [];
     this.refWordField = React.createRef();
     this.refBtnNext = React.createRef();
     this.refBtnAutoFinish = React.createRef();
     this.refBtnOk = React.createRef();
     this.refAudio = React.createRef();
-    this.dataLevel =`${this.props.difficulty}${this.props.currentLevel}`;
-    this.nameScore = `${this.props.difficulty}Score`;
-    this.nameCorrect = `${this.props.difficulty}Correct`;
-    this.nameInCorrect = `${this.props.difficulty}InCorrect`;
+    this.dataLevel =`${this.difficulty}${this.currentLevel}`;
+    this.nameScore = `${this.difficulty}Score`;
+    this.nameCorrect = `${this.difficulty}Correct`;
+    this.nameInCorrect = `${this.difficulty}InCorrect`;
     this.correctScore = (Number(this.state.currentPlayer[this.nameCorrect]));
     this.incCorrectScore = (Number(this.state.currentPlayer[this.nameInCorrect]));
-
-
+    if(this.difficulty==="easy"){
+    this.divStyle = {width:`24rem`};
+    this.titleStyle = {height:"8rem"};
+    }
+    if(this.difficulty==="normal" || this.difficulty==="hard"){
+    this.divStyle = {width:`28rem`}
+    }
     
   }
+componentDidMount() {
+
+}
+
 componentDidMount() {
   this.setState({countCorrect:this.correctScore, countIncorrect:this.incCorrectScore});
   this.currentPlayer = JSON.parse(localStorage.getItem(localStorage.getItem("currentPlayer")));
@@ -51,10 +70,12 @@ componentDidMount() {
 }
 
   componentDidUpdate() {
+  
+
     this.letters = document.querySelectorAll('.lettersGame');
     
     if (this.state.field.every(this.isWinner)){
-      if(this.refBtnAutoFinish.current){
+      if(this.refBtnOk.current){
         this.refBtnAutoFinish.current.style.pointerEvents = "none";
         this.refBtnNext.current.style.pointerEvents = "none";
         this.refBtnOk.current.style.pointerEvents = "none";
@@ -73,9 +94,49 @@ componentDidMount() {
     }
   }
   componentWillUnmount() {
+
+    this.setState({dataScoreState: this.dataScore});
+    console.log(this.state.dataScoreState);
   }
 
+winnerAnimation(){
+  let arrFieldCell = document.querySelectorAll('.fieldCell');
+  console.log(arrFieldCell);
+
+  arrFieldCell.forEach(e=>{
+    e.style.position = "fixed";
+    e.style.top = `40%`;
+    e.style.left = `45%`;
+
+    e.classList.add('rotateFinish');
+    setInterval(() => {
+    e.style.top = `${Math.random()*50}%`;
+    e.style.left = `${Math.random()*50}%`;
+    }, 1000);
+   
+
+  })
+  setTimeout(()=>{
+    arrFieldCell.forEach(e=>{
+    e.style.position = ""});
+  }, 5000);
+}
+
+changedLevel(difficulty, currentLevel, isChanged){
+this.currentLevel = currentLevel;
+if(difficulty==="easy" && isChanged){
+this.difficulty = "normal";
+this.currentLevel = "1";
+}
+if(difficulty==="normal" && isChanged){
+this.difficulty = "hard";
+this.currentLevel = "1";
+}
+this.setState({stateGame:false});
+}
+
   setChanged(level) {
+  console.log(level);
   this.setState({ field: level.field, wordsGame: level.wordsGame, winnerField: level.winnerField, winnerLine: level.winnerLine, codGame: level.codGame });
   }
 
@@ -170,6 +231,7 @@ this.setState({fullScreen:!this.state.fullScreen});
     }
 
   clickOk = () => {
+    this.winnerAnimation();
    // let currentPlayer = JSON.parse(localStorage.getItem(localStorage.getItem("currentPlayer")));
     let countCorrect = this.state.countCorrect;
     let countIncorrect = this.state.countIncorrect;
@@ -189,10 +251,12 @@ this.setState({fullScreen:!this.state.fullScreen});
         })
         this.setState({ field: this.fieldCurrent });
         if (this.state.field.every(this.isWinner)) {
-          this.setState({ stateGame: true });
-          let n = Number(this.currentPlayer[this.props.difficulty]);
-          if(n===Number(this.props.currentLevel) && n!==3){
-            this.currentPlayer[this.props.difficulty]=String(n+1);
+          this.winnerAnimation();
+          setTimeout(()=> this.setState({ stateGame: true }), 5000);
+          //this.setState({ stateGame: true });
+          let n = Number(this.currentPlayer[this.difficulty]);
+          if(n===Number(this.currentLevel) && n!==3){
+            this.currentPlayer[this.difficulty]=String(n+1);
             localStorage.setItem(this.currentPlayer.name, JSON.stringify(this.currentPlayer));
           }
         }
@@ -208,7 +272,7 @@ this.setState({fullScreen:!this.state.fullScreen});
     })
     if (countCorrect === this.state.countCorrect) {
       playSound(soundInCorrect, this.state.volume);
-      this.refWordField.current.classList.add('incorrectUnswer');
+      this.refWordField.current.classList.add('incorrectAnswer');
       countIncorrect++;
       this.inCorrectScore = (Number(this.state.currentPlayer[this.nameInCorrect]));
       this.currentPlayer[this.nameInCorrect]=countIncorrect;
@@ -221,8 +285,8 @@ this.setState({fullScreen:!this.state.fullScreen});
   }
   clickHandler = (event) => {
 
-    if (this.refWordField.current.classList.contains('incorrectUnswer')) {
-      this.refWordField.current.classList.remove('incorrectUnswer');
+    if (this.refWordField.current.classList.contains('incorrectAnswer')) {
+      this.refWordField.current.classList.remove('incorrectAnswer');
     }
 
     let data = event.target.textContent;
@@ -236,9 +300,19 @@ this.setState({fullScreen:!this.state.fullScreen});
   render() {
     return (
       <>
+      {this.state.statistics
+      ? 
+      <div className="statistics"> Статистика
+      <div className="btnStart" onClick={()=>(this.setState({statistics:!this.state.statistics}))}> Закрыть </div>
+
+      <ScorePage />
+      </div>
+      :<></>}
+
       <div className="leftBlock">
 <div className="btnStart" onClick={()=>this.props.backToMenu()}> Меню </div>
 <div className="btnStart"> Справка </div>
+<div className="btnStart" onClick={()=>(this.setState({statistics:!this.state.statistics}))}> Статистика </div>
 </div>
 
       <div className="game">
@@ -247,14 +321,40 @@ this.setState({fullScreen:!this.state.fullScreen});
           ?
           <>
             <div className="winnerBox winnerGame">
-              Ура
+            <div className="winnerGameTitle">Поздравляем!</div>
+            <div className="winnerGameTitle">{`Уровень ${this.difficulty} ${this.currentLevel} пройден!`}</div>    
+{(this.currentLevel==="1")
+? 
+<>
+<div className="btnStart" onClick={()=>this.changedLevel(this.difficulty,"2",false)}> Следующий уровень </div>
+</>
+:<></>}
+{(this.currentLevel==="2")
+? 
+<>
+<div className="btnStart" onClick={()=>this.changedLevel(this.difficulty,"3",false)}> Следующий уровень </div>
+</>
+:<></>}
+{(this.currentLevel==="3")
+? 
+<>
+{(this.difficulty==="hard")
+?<div className="btnStart" onClick={()=>this.props.backToMenu()}> В меню</div>
+:<div className="btnStart" onClick={()=>this.changedLevel(this.difficulty,"1",true)}> Перейти на следующую сложность</div>}
+</>
+:<></>}
 </div>
           </>
           :
           <>
            
-            <div className="title">Угадай слова</div>
-            <div className="field">
+            <div className="title" style={this.titleStyle}>
+            <div className="full"></div>
+              Угадай слова
+            <div className="btnFullScreen" onClick={this.jobFullScreen}>full screen</div>
+            
+            </div>
+            <div className="field" style = {this.divStyle}>
               {this.state.field.map((item, index) => (
                 <div className={`fieldCell ${item}`} key={index}>{item}</div>
               ))}
@@ -272,45 +372,47 @@ this.setState({fullScreen:!this.state.fullScreen});
               ))}
             </div>
             <div className="btnBox">
-              <div className="btnNext" ref={this.refBtnNext} onClick={() => this.clickNext(this.state.countIncorrect)}> Next </div>
-              <div className="btnAutoFinish" ref={this.refBtnAutoFinish} onClick={() => this.clickAutoFinish(this.state.countIncorrect)}> End </div>
-             
-              <div className="btnOk" ref={this.refBtnOk} onClick={this.clickOk}> ок </div>
-              <div className="btnFullScreen" onClick={this.jobFullScreen}> full </div>
-              <div className="btnFullScreen" onClick={()=>this.clear()}> Clear </div>
-          
 
-              
-              <Level setChanged={this.setChanged} field = {this.field} line = {this.lineSave} repeat={(this.state.field.every(this.isWinner))} difficulty={this.props.difficulty} currentLevel={this.props.currentLevel}/>
+             
+              <div className="btnOk" ref={this.refBtnOk} onClick={this.clickOk}> Принять </div>
+              <div className="btnClear" onClick={()=>this.clear()}> Очистить </div>
+          
+              <Level funAnimation = {this.winnerAnimation} setChanged={this.setChanged} field = {this.state.field} line = {this.lineSave} repeat={(this.state.field.every(this.isWinner))} difficulty={this.difficulty} currentLevel={this.currentLevel}/>
             </div>
           
           </>
         }
       </div>
-      <div className="rightBlock"> Статистика игры
+      <div className="rightBlock">
+      <div className="StatisticsBox"> Статистика игры
+
       <div className="difficultyTitle">Сложность:</div>
-    <div className="difficulty">{this.props.difficulty}</div>
-    <div className="levelTitle">Сложность:</div>
-    <div className="level">{this.props.currentLevel}</div>
+    <div className="difficulty">{this.difficulty}</div>
+    <div className="levelTitle">Уровень:</div>
+    <div className="level">{this.currentLevel}</div>
     
       <div className="correctBox"> Правильных ответов:
       <div className="countCorrect"> {this.state.countCorrect} </div>
       </div>
-      <div className="inCorrectBox"> Нравильных ответов:
+      <div className="inCorrectBox"> Неправильных ответов:
       <div className="countIncorrect"> {this.state.countIncorrect} </div>
+      </div>
       </div>
 
       
-      <div className="volumeBox">
+     
+            <div className="helpBox"> Помощник
+            <div className="btnNext" ref={this.refBtnNext} onClick={() => this.clickNext(this.state.countIncorrect)}>Next word</div>
+              <div className="btnAutoFinish" ref={this.refBtnAutoFinish} onClick={() => this.clickAutoFinish(this.state.countIncorrect)}> Autoplay </div>
+            </div>
+            <div className="volumeBox">
             <div className="volumeNull" onClick={() => this.clickVolumeNull()}>0</div>
               <div className="volumeMinus" onClick={() => this.clickMinus()}>-</div>
               <div className="volumeValueWrapper">
                 <div className="volumeValue" ref={this.refAudio}>{this.state.volume}</div>
               </div>
               <div className="volumePlus" onClick={() => this.clickPlus()}>+</div>
-
             </div>
-      
       </div>
 </>
     );
