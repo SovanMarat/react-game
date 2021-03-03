@@ -11,11 +11,9 @@ const scorePlayers = (e)=>{
 let tempStatistics = setScore(e);
 setStatisticsView(tempStatistics);
 setStatisticsLevel(`${e}Score`);
-console.log(statisticsLevel);
 }
 useEffect(()=>{
 scorePlayers("easy")
-console.log("easyeasyeasyeasy");
 
 }
 ,[]);
