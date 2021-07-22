@@ -1,0 +1,511 @@
+$lightBackground:rgb(227, 231, 231);
+$lightStartMenu:rgb(255, 255, 255);
+$lightCell:rgb(3, 44, 44);
+$lightBtn:rgb(100, 149, 237);
+
+html {
+    font-size: 10px;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 600;
+    background-color: $lightBackground;
+    box-sizing: border-box;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background-color: blueviolet;
+}
+.rightBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+    color: rgb(238, 238, 238);
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background-color: #1c1325;
+
+}
+.wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #352b40;
+}
+.startPageBox {
+    border: 1px solid rgb(0, 0, 0);
+    width: 50%;
+    height: 50%;
+    background-color: $lightStartMenu;
+}
+.formStart{
+    font-size: 2rem;
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.gameTitle {
+    font-size: 3rem;
+
+}
+.scoreTitle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.boxScore{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction:column;
+    align-items: center;
+}
+.scoreTable{
+    font-size:2rem;
+    width: 30rem;
+    height: 3rem;
+    background-color:$lightStartMenu;
+    z-index:1;
+    margin-top: 1rem;
+     display:flex;
+    align-items:center;
+    padding-left: 1rem;
+}
+.boxScoreBtn{
+     display:flex;
+     justify-content: center;
+
+}
+.btnStart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15rem;
+    height: 5rem;
+    font-size: 2rem;
+    color: cornsilk;
+cursor: pointer;
+background-color: rgb(63, 70, 70);
+transition: 0.3s;
+margin-top: 0.5rem;
+z-index: 2;
+}
+.btnStart:hover {
+background-color: rgb(0, 107, 107);
+}
+.startBoxMenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+.statistics {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(179, 212, 29);
+    display:flex;
+flex-direction:column;
+text-align: center;
+font-size: 3rem;
+}
+.leftBlock{
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #1c1325;
+}
+
+.test {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(10, 238, 238);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+cursor: pointer;
+}
+#root{
+    width: 100%;
+    height: 100%;
+}
+.game {
+    width: 60%;
+    height: 93%;
+    align-self: flex-start;
+    /* width: 900px; */
+    /* border: 2px solid blue; */
+    /* margin: 2rem auto; */
+    display: grid;
+    justify-self: center;
+}
+.volumeBox{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 90%;
+    height: 3rem;
+    border: 1px solid blue;
+    box-sizing: border-box;
+}
+.volumeNull {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid blue;
+    box-sizing: border-box;
+
+}
+.volumeMinus {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid blue;
+    box-sizing: border-box;
+
+}
+.volumePlus {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgb(0, 255, 76);
+    box-sizing: border-box;
+
+}
+
+.volumeValueWrapper {
+    font-size: 2rem;
+    width: 9rem;
+    height: 2rem;
+    border: 1px solid rgb(0, 255, 76);
+    color: black;
+    box-sizing: border-box;
+
+}
+.volumeValue {
+    top: 0;
+    left: 0;
+    font-size: 1rem;
+    width: 75%;
+    height: 2rem;
+    border: 1px solid rgb(0, 255, 76);
+    background-color: rgb(228, 84, 113);
+    color: black;
+    box-sizing: border-box;
+
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    font-size: 3rem;
+  
+    color: rgb(0, 0, 0);
+}
+
+.field {
+    /* border: 1px solid red; */
+    width: 30rem;
+    height: 30rem;
+    align-self: center;
+    justify-self: center;
+  
+}
+.fieldCell {
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 1px solid #46a9a9;
+    border-collapse: collapse;
+    float: left;
+    box-sizing: border-box;
+background-color: $lightCell;
+border-radius: 1rem;
+color: rgb(255, 255, 255);
+transition: 1s;
+}
+.none {
+background-color: #352b40;
+color:#352b40;
+border: none;
+pointer-events: none;
+}
+.lettersGameField {
+    align-self: center;
+    justify-self: center;
+}
+
+.lettersGame {
+    color: aliceblue;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 1px solid black;
+    float: left;
+    box-sizing: border-box;
+    background-color: #054c4c;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.lettersGame:hover {
+    background-color: rgb(10, 99, 99);
+}
+
+.word {
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    border: 1px solid black;
+    float: left;
+    box-sizing: border-box;
+    
+}
+
+.wordField {
+    width: 35rem;
+    height: 4.5rem;
+    align-self: center;
+    justify-self: center;
+    background-color: #373548;
+    margin-top: 0.5rem;
+    color:aliceblue;
+}
+.full{
+    width: 6rem;
+    height: 5rem; 
+}
+.btnFullScreen {
+    background-color: rgb(21, 3, 54);
+    color: cornsilk;
+    width: 6rem;
+    height: 3rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 1rem;
+    text-align: center;
+    border: 1px solid #4e547b;
+    border-radius: 1rem;
+}
+.btnOk {
+    background-color: $lightBtn;
+    color: cornsilk;
+    width: 24rem;
+    height: 4rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;
+}
+.btnRepeat {
+    background-color: $lightBtn;
+    color: cornsilk;
+    width: 10rem;
+    height: 4rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;  
+    margin-left: 1rem; 
+}
+.countCorrect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(12, 95, 33);
+    font-size: 1.8rem;
+    color: cornsilk;
+    width: 90%;
+    height: 3rem;
+}
+.countIncorrect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #611b1b;
+    font-size: 1.8rem;
+    color: cornsilk;
+  width: 90%;
+    height: 3rem;
+}
+.btnBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btnClear{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b3b8a;
+    font-size: 1.8rem;
+    color: cornsilk;
+    width: 10rem;
+    height: 4rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.inCorrectBox, .correctBox{
+    width: 100%;
+    font-size: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.StatisticsBox {
+    width: 90%;
+    height: 37%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #434658;
+    border-radius: 1rem;
+    margin-top: 1rem; 
+}
+.helpBox{
+    width: 90%;
+    height: 17%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #434658;
+    border-radius: 1rem;
+margin-top: 1rem;
+}
+.btnNext {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b3b8a;
+    font-size: 1.8rem;
+    color: cornsilk;
+    width: 90%;
+    height: 3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+
+}
+
+.btnAutoFinish {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b3b8a;
+    font-size: 1.8rem;
+    color: cornsilk;
+    width: 90%;
+    height: 3rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+.winnerBox {
+font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding-top: 1rem;
+    flex-direction:column;
+}
+.rotateFinish{
+// border: 2px solid red;
+animation: 1s main-rotate both infinite;
+}
+.incorrectAnswer {
+    border: 2px solid red;
+animation: 0.1s tremor ease-out;
+}
+
+.winnerGame {
+    border: 2px solid rgb(0, 255, 149);
+// animation: 2s main-rotate ease-out;
+}
+
+@keyframes tremor {
+    0% {
+        left:-0.5px;
+        transform: translateX(-4%);
+    }
+    25%{
+        left:0.5px;
+        transform: translateX(4%);
+    }
+    75%{
+        left:-0.5px;
+        transform: translateX(-4%);
+    }
+
+    100% {
+        left:0.5px;
+        transform: translateX(4%);  
+    }
+}
+
+// @keyframes main-rotate {
+//   0% {
+//     transform: rotateY(0);
+//   }
+//   50% {
+//     transform: rotateY(180deg);
+//   }
+//   100% {
+//     transform: rotateY(360deg);
+//   }
+// }
+
+@keyframes main-rotate {
+//   0% {
+// transform: translate(2rem, 1rem);
+//   }
+//   50% {
+// transform: translate(1rem, -5rem);
+//   }
+//   100% {
+// transform: translate(5rem, 3rem);
+//   }
+}
